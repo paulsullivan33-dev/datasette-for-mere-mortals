@@ -1,0 +1,25 @@
+$ curl -s 'http://127.0.0.1:8001/library.json?sql=delete+from+books+where+id+%3D+1'
+{"ok": false, "error": "Statement must be a SELECT", "status": 400, "title": "Invalid SQL"}
+$ curl -s 'http://127.0.0.1:8001/library/books.json' | python3 -c 'import json,sys; print(json.load(sys.stdin)["filtered_table_rows_count"])'
+14
+
+$ curl -s -w '\nhttp: %{http_code}\n' 'http://127.0.0.1:8001/library/nope.json'
+{"ok": false, "error": "Table not found", "status": 404, "title": null}
+http: 404
+$ curl -s 'http://127.0.0.1:8001/library.json?sql=select+from+where'
+{"ok": false, "database": "library", "query_name": null, "rows": [], "truncated": false, "columns": [], "query": {"sql": "select from where", "params": {}}, "error": "near \"from\": syntax error", "private": false, "allow_execute_sql": true, "query_ms": 1.0020429999713087, "source": "The Datasette for Mere Mortals lab", "license": "CC0"}
+$ curl -s --max-time 10 'http://127.0.0.1:8001/library.json?sql=with+recursive+cnt(x)+as+(select+1+union+all+select+x%2B1+from+cnt)+select+count(*)+from+cnt'
+{"ok": false, "error": "<p>SQL query took too long. The time limit is controlled by the\n<a href=\"https://docs.datasette.io/en/stable/settings.html#sql-time-limit-ms\">sql_time_limit_ms</a>\nconfiguration option.</p>\n<textarea style=\"width: 90%\">with recursive cnt(x) as (select 1 union all select x+1 from cnt) select count(*) from cnt</textarea>\n<script>\nlet ta = document.querySelector(\"textarea\");\nta.style.height = ta.scrollHeight + \"px\";\n</script>", "status": 400, "title": "SQL Interrupted"}
+$ datasette publish
+Usage: datasette publish [OPTIONS] COMMAND [ARGS]...
+
+  Publish specified SQLite database files to the internet along with a
+  Datasette-powered interface and API
+
+Options:
+  --help  Show this message and exit.
+
+Commands:
+  cloudrun  Publish databases to Datasette running on Cloud Run
+  heroku    Publish databases to Datasette running on Heroku
+(exit code 2)

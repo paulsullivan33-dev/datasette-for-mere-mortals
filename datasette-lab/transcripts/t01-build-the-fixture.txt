@@ -1,0 +1,7 @@
+$ python3 make_library_db.py
+authors: 6 rows
+books: 14 rows
+wrote library.db
+
+$ python3 -c 'import sqlite3; db = sqlite3.connect("library.db"); print(db.execute("pragma foreign_key_list(books)").fetchall())'
+[(0, 0, 'authors', 'author_id', 'id', 'NO ACTION', 'NO ACTION', 'NONE')]

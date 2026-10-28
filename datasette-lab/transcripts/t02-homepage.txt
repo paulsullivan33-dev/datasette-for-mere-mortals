@@ -1,0 +1,8 @@
+$ curl -s http://127.0.0.1:8001/ | grep -o '<title>[^<]*</title>'
+<title>Harbour Street Library Catalogue: library</title>
+
+$ curl -s http://127.0.0.1:8001/library/books | grep -o '<title>[^<]*</title>'
+<title>library: books: 14 rows sorted by year descending</title>
+
+$ curl -s http://127.0.0.1:8001/library.json | python3 -c 'import json,sys; d=json.load(sys.stdin); print([(t["name"], t["count"], t["fts_table"]) for t in d["tables"] if not t["hidden"]])'
+[('authors', 6, None), ('books', 14, 'books_fts')]

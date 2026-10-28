@@ -1,0 +1,4 @@
+$ kill $(cat server.pid)
+
+$ curl -s --max-time 3 http://127.0.0.1:8001/
+curl exit code: 7

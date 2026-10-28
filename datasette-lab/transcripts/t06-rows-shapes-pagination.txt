@@ -1,0 +1,11 @@
+$ curl -s 'http://127.0.0.1:8001/library/books/5.json'
+{"database": "library", "table": "books", "rows": [[5, "The Night Bus to Meridia", 2, 2018, "Mystery", 328]], "columns": ["id", "title", "author_id", "year", "genre", "pages"], "primary_keys": ["id"], "primary_key_values": ["5"], "units": {}, "query_ms": 2.6009409999687705, "source": "The Datasette for Mere Mortals lab", "license": "CC0"}
+$ curl -s 'http://127.0.0.1:8001/library/books.json?_shape=arrayfirst'
+[12, 8, 3, 10, 5, 9, 2, 7, 1, 4, 11, 6, 14, 13]
+$ curl -s 'http://127.0.0.1:8001/library/books.json?_size=5&_shape=objects' | python3 -c 'import json,sys; d=json.load(sys.stdin); print(len(d["rows"]), d["next_url"])'
+5 http://127.0.0.1:8001/library/books.json?_size=5&_shape=objects&_next=2018%2C5&_sort_desc=year
+$ curl -s '<the next_url from the line above>' | python3 -c 'import json,sys; d=json.load(sys.stdin); print(len(d["rows"]), [r["title"] for r in d["rows"]])'
+5 ["The Clockmaker's Garden", "A Cartographer's Daughter", 'The Herring Fleet', 'The Salt Road Atlas', 'Signals from a Small Town']
+
+$ curl -s http://127.0.0.1:8001/library/books | grep -o 'Mara Ellison' | head -1
+Mara Ellison

@@ -1,0 +1,27 @@
+site_name: Datasette for Mere Mortals
+site_description: A website and a JSON API from a SQLite file you already have. Serving a database on your own machine, browsing its tables, filtering and searching them, asking questions in SQL, and adding the titles, facets and canned queries that turn a raw file into a small publication, with the limits stated plainly.
+site_url: https://paulsullivan33-dev.github.io/datasette-for-mere-mortals/
+copyright: 'Part of <a href="https://paulsullivan33-dev.github.io/mere-mortals/">For Mere Mortals</a> · Text <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code MIT'
+
+# Guides live at the repo root (nice for GitHub browsing).
+# The deploy workflow copies them into docs/ before building.
+theme:
+  name: material
+
+nav:
+  - Home: index.md
+  - What Datasette Is: what-datasette-is.md
+  - The Moving Parts: the-moving-parts.md
+  - Installing Datasette: installing-datasette.md
+  - Your First Database: your-first-database.md
+  - Browsing Tables: browsing-tables.md
+  - The JSON API: the-json-api.md
+  - Asking Questions with SQL: asking-questions-with-sql.md
+  - Facets and Metadata: facets-and-metadata.md
+  - Publishing and Sharing: publishing-and-sharing.md
+  - Recipes: recipes.md
+  - The Neighbours: the-neighbours.md
+  - Limits: limits.md
+  - Troubleshooting: troubleshooting.md
+  - Glossary: glossary.md
+  - Writing Criteria: criteria.md
